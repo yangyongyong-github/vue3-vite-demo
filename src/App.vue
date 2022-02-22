@@ -1,14 +1,7 @@
 <template>
   <div id="app">
-    <h4>vue3 vite</h4>
-    <div class="main">
-      <router-link to="/todos">todos</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/about">async Comp</router-link>
-    </div>
-    <div class="content">
-      <router-view></router-view>
-    </div>
+    <div class="tip" @click="goHomeHandle">Back Home</div>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,5 +9,23 @@
 export default {
   name: "App",
   components: {},
+  methods: {
+    goHomeHandle() {
+      this.$router.replace("/");
+    },
+  },
 };
 </script>
+<style lang="scss" scoped>
+.tip {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 30px;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+    // box-shadow: 3px 3px 0.3px silver;
+  }
+}
+</style>

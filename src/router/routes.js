@@ -1,9 +1,10 @@
 // import Home from '@/views/home'
-const Home = { template: '<div>Home</div>' }
+// const Home = { template: '<h1>Home</h1>' }
 const NotFound = { template: '<div>404</div>' }
 
 import Todos from '../views/todos/index.vue'
-
+import Home from '../views/home/index.vue'
+import GDP from '../views/GDP/index.vue'
 // import { getAsyncPage } from "../util/asyncComp"
 
 // const Todos = getAsyncPage('../views/todos')
@@ -22,9 +23,9 @@ export default [
         meta: {}
     },
     {
-        name: 'about',
-        component: () => import('../views/about/index.vue'),
-        path: '/about',
+        name: 'GDP',
+        component: GDP, // () => import('../views/GDP/index.vue'),
+        path: '/GDP',
         meta: {}
     },
     {

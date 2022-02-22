@@ -6,12 +6,13 @@ const validHash = ['all', 'active', 'completed'];// 有效的hash值匹配
 /**
  * useFilter
  */
-export default function useFilter(todoRef) {
+export default function useFilter(todosRef) {
 
     const visibilityRef = ref('all'); // 接受一个内部值并返回一个响应式且可变的 ref 对象
 
     const onHashChange = () => {
-        const hash = location.hash.replace(/#\?/, "");// 去除#和?
+        const hash = location.hash.replace(/#\/?/, "");// 去除#和?
+    
         if (validHash.includes(hash)) {
             // 有效的
             visibilityRef.value = hash;
@@ -22,20 +23,27 @@ export default function useFilter(todoRef) {
     }
 
 
-
     onMounted(() => {
-        window.addEventListener('hashChange', onHashChange);
+        // window.addEventListener('hashChange', onHashChange); // 系统内置为小写的hashchange
+        window.addEventListener('hashchange', onHashChange);
     })
 
     onUnmounted(() => {
-        window.removeEventListener('hashChange', onHashChange);
+        window.removeEventListener('hashchange', onHashChange);
     })
 
     /**
      * 过滤后的属性值
      */
     const filteredTodosRef = computed(() => {
-        return filter(todoRef.value, visibilityRef.value)
+        // console.log(todoRef.value);
+        /**
+         * Proxy {0: {…}, 1: {…}, 2: {…}}
+                [[Handler]]: Object
+                [[Target]]: Array(3)
+                [[IsRevoked]]: false
+         */
+        return filter(todosRef.value, visibilityRef.value)
     })
 
     /**
@@ -43,7 +51,7 @@ export default function useFilter(todoRef) {
      *      得到正在执行的任务，以便于页面的显示
      */
     const remainingRef = computed(() => {
-        return filter(todoRef.value, "active").length
+        return filter(todosRef.value, 'active').length;
     })
 
     /**
@@ -51,7 +59,8 @@ export default function useFilter(todoRef) {
         (用于决定清空按钮是否显示)
      */
     const completedRef = computed(() => {
-        return filter(todoRef.value, 'completed').length;
+        
+        return filter(todosRef.value, 'completed').length;
     })
 
 

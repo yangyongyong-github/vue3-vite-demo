@@ -29,11 +29,12 @@ export function save(todos) {
 /**
  * filter task
  */
-export function filter(todos, visiablity = "all") {
-    if (visiablity === 'all') return todos;
-    else if (visiablity === 'active') {
-        return todos.filter(it => it.completed);
-    } else if (visiablity === 'completed') {
+export function filter(todos, visibility = "all") {
+    if (visibility === 'all') {
+        return todos;
+    }else if (visibility === 'active') {
+        return todos.filter(it => it.active);
+    } else if (visibility === 'completed') {
         return todos.filter(it => it.completed)
     }
     throw new Error("invalid visibility value")
